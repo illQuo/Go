@@ -2,7 +2,9 @@ package main
 
 import (
 	"fmt"
+	"io/ioutil"
 	"math/rand"
+	"strings"
 	"time"
 )
 
@@ -71,4 +73,14 @@ func (d deck) print() {
 	for _, card := range d {
 		fmt.Println(card)
 	}
+}
+
+func (d deck) toString() string {
+	deckString := strings.Join([]string(d), ",")
+	return deckString
+}
+
+func (d deck) saveToFile(fileLocation string) error {
+	deckString := d.toString()
+	return ioutil.WriteFile(fileLocation, []byte(deckString), 0644)
 }
