@@ -76,6 +76,25 @@ func (d deck) print() {
 	}
 }
 
+func (d deck) shuffleDeck() {
+	for i := range d {
+		newPosition := rand.Intn(len(d) - 1)
+		// one liner to swap two values in a slice
+		d[i], d[newPosition] = d[newPosition], d[i]
+	}
+
+	// Alernative shuffle
+	//final := make(deck, len(d))
+	//perm := rand.Perm(len(d))
+
+	//for i, v := range perm {
+	//	final[v] = d[i]
+	//}
+
+	//return final
+
+}
+
 func (d deck) toString() string {
 	deckString := strings.Join([]string(d), ",")
 	return deckString
