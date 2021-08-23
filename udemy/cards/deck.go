@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"math/rand"
+	"os"
 	"strings"
 	"time"
 )
@@ -83,4 +84,15 @@ func (d deck) toString() string {
 func (d deck) saveToFile(fileLocation string) error {
 	deckString := d.toString()
 	return ioutil.WriteFile(fileLocation, []byte(deckString), 0644)
+}
+
+func newDeckFromFile(fileLocation string) deck {
+	bs, err := ioutil.ReadFile(fileLocation)
+	if err != nil {
+		fmt.Println(err)
+		os.Exit(1)
+	}
+	// Convert byte slice -> string -> string slice -> deck
+	s := strings.Split(string(bs), ",")
+	return deck(s)
 }
